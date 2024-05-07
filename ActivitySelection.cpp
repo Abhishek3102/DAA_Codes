@@ -1,3 +1,4 @@
+// activitySelection
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -30,4 +31,11 @@ int activitySelection(vector<int> start, vector<int> end)
         }
     }
     return count;
+}
+int main()
+{
+    vector<int> start = {1, 0, 1, 4, 2, 5, 3, 4};
+    vector<int> end = {3, 4, 2, 6, 9, 8, 5, 5};
+    cout << activitySelection(start, end) << endl;
+    return 0;
 }
