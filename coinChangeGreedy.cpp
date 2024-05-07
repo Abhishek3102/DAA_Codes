@@ -6,7 +6,7 @@ using namespace std;
 int minCoins(vector<int> coins, int coin)
 {
     sort(coins.begin(), coins.end());
-    int count = 0; // Initialize count
+    int count = 0;
     for (int i = coins.size() - 1; i >= 0; i--)
     {
         while (coins[i] <= coin)
@@ -21,8 +21,8 @@ int minCoins(vector<int> coins, int coin)
 int main()
 {
     int coin = 6;
-    vector<int> coins = {1, 3, 5, 2}; // Corrected typo
+    vector<int> coins = {1, 3, 5, 2};
     int ans = minCoins(coins, coin);
-    cout << "The minimum number of coins required is " << ans; // Added space before ans
+    cout << "The minimum number of coins required is " << ans;
     return 0;
 }
