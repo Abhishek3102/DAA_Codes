@@ -1,68 +1,59 @@
 #include <stdio.h>
-#include <time.h>
-int main()
+#include <conio.h>
+#define MAX 100
+int partition(int a[], int lb, int ub)
 {
-    int arr[1000], n;
-    double start, end, TT;
-
-    printf("Enter the number of elements: ");
-    scanf("%d", &n);
-    for (int i = 0; i < n; i++)
+    int pivot, start, end, temp;
+    pivot = a[lb];
+    start = lb;
+    end = ub;
+    while (start < end)
     {
-        // arr[i]= 13*i + 92; //Best
-        // arr[i]= rand()%10000 + 72; //Average
-        // arr[i]= 100000 - 7*i; //Worst
+        while (a[start] <= pivot)
+            start++;
+        while (a[end] > pivot)
+            end--;
+        if (start < end)
+        {
+            temp = a[start];
+            a[start] = a[end];
+            a[end] = temp;
+        }
     }
-    start = clock();
-    end = clock();
-    /* printf("The sorted array is: \n");
-    for(int i=0;i<n;i++)
-    {
-    printf("%d\n", arr[i]);
-    } */
-    TT = (end - start);
-    printf("Time taken is %f", TT);
-    return 0;
+    temp = a[lb];
+    a[lb] = a[end];
+    a[end] = temp;
+    return end;
 }
-void merge(int arr[], int low, int mid, int high)
+void quickSort(int a[], int lb, int ub)
 {
-    int i, j, k;
-    int n1 = mid - low + 1;
-    int n2 = high - mid;
-    int L[n1], M[n2];
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[low + i];
-    for (int j = 0; j < n2; j++)
-        M[j] = arr[mid + 1 + j];
-    j = 0;
-    k = low;
-    while (i < n1 && j < n2)
+    int loc;
+    if (lb < ub)
     {
-        if (L[i] <= M[j])
-        {
-            arr[k++] = L[i++];
-        }
-        else
-        {
-            arr[k++] = M[j++];
-        }
+        loc = partition(a, lb, ub);
+        quickSort(a, lb, loc - 1);
+        quickSort(a, loc + 1, ub);
     }
-    while (i < n1)
+}
+void main()
+{
+    int n, i, a[MAX], lb, ub;
+    printf("Veer Chheda 60019220017\n");
+    printf("Enter Number of Element to be Sort: ");
+    scanf("%d", &n);
+    printf("Enter %d Elements in Array to Sort: ", n);
+    for (i = 0; i < n; i++)
     {
-        arr[k++] = L[i++];
+        scanf("%d", &a[i]);
     }
-    while (j < n2)
-    {
-        arr[k++] = M[j++];
-        void mergeSort(int arr[], int low, int high);
-        {
-            if (low < high)
-            {
-                int mid = (low + high) / 2;
-                mergeSort(arr, low, mid);
-                mergeSort(arr, mid + 1, high);
-                merge(arr, low, mid, high);
-            }
-        }
-    }
+    printf("Array Before Sorting:\n");
+    for (i = 0; i < n; i++)
+        printf("%d\t", a[i]);
+    lb = 0;
+    ub = n - 1;
+    quickSort(a, lb, ub);
+    printf("\nArray After Sorting:\n");
+    for (i = 0; i < n; i++)
+        printf("%d\t", a[i]);
+    getch();
 }
